@@ -13,7 +13,7 @@ export default async function AdminProductEditPage({ params }: PageProps) {
   if (!product) notFound();
 
   return (
-    <div>
+    <div className="w-full">
       <div className="flex items-center gap-4 mb-6">
         <Link href="/admin/products" className="text-wood-light text-sm hover:underline">
           ← Produits

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { createProduct, saveProduct } from "@/app/actions/admin";
 import { getProductImagePath } from "@/lib/images";
 import { ProductCardPreview } from "@/components/ProductCardPreview";
+import { toast } from "@/hooks/useToast";
 import type { Product } from "@/types";
 
 interface ProductFormProps {
@@ -54,8 +55,10 @@ export function ProductForm({ product }: ProductFormProps) {
         const result = await saveProduct(formData);
         if (result.error) {
           setError(result.error);
+          toast.error(result.error);
           return;
         }
+        toast.success("Produit enregistré.");
         if (fileInputRef.current) fileInputRef.current.value = "";
         setImagePreview(null);
         router.refresh();
@@ -63,8 +66,10 @@ export function ProductForm({ product }: ProductFormProps) {
         const result = await createProduct(formData);
         if (result.error) {
           setError(result.error);
+          toast.error(result.error);
           return;
         }
+        toast.success("Produit créé.");
         if (result.id) router.push(`/admin/products/${result.id}`);
         else router.push("/admin/products");
         router.refresh();
@@ -75,8 +80,8 @@ export function ProductForm({ product }: ProductFormProps) {
   };
 
   return (
-    <div className="flex flex-col md:flex-row gap-8 items-start">
-      {/* Preview: same as ProductCard (Collection, Title, Image, Price) */}
+    <div className="w-full max-w-7xl flex flex-col md:flex-row gap-10 items-start justify-center">
+      {/* Preview: updates instantly with form values (Collection, Title, Image, Price) */}
       <div className="w-full md:w-auto shrink-0">
         <p className="text-wood-light text-sm font-medium mb-2">Aperçu</p>
         <ProductCardPreview
@@ -87,7 +92,7 @@ export function ProductForm({ product }: ProductFormProps) {
         />
       </div>
 
-      <form onSubmit={handleSubmit} className="max-w-lg space-y-4 flex-1">
+      <form onSubmit={handleSubmit} className="flex-1 min-w-0 max-w-2xl space-y-4">
         <div>
           <label htmlFor="collectionName" className="block text-wood-dark font-medium text-sm mb-1">
             Collection

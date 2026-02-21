@@ -21,7 +21,7 @@ export function ProductCardPreview({
   const showImage = imageUrl && !imgError;
 
   return (
-    <div className="block bg-stone rounded overflow-hidden border border-metal-dark/10 max-w-xs">
+    <div className="block bg-stone rounded overflow-hidden border border-metal-dark/10 max-w-xs min-w-[400px]">
       <div className="aspect-[4/3] relative bg-wood-dark/10">
         {showImage ? (
           <img
@@ -37,13 +37,13 @@ export function ProductCardPreview({
         )}
       </div>
       <div className="p-3">
-        <p className="text-wood-light text-xs uppercase tracking-wide">
+        <p className="text-wood-light text-xs uppercase tracking-wide text-center">
           {collectionName || "—"}
         </p>
-        <p className="font-display font-bold text-wood-dark text-center">
+        <p className="font-display font-bold text-wood-dark text-center  uppercase">
           {title || "—"}
         </p>
-        <p className="text-wood-light text-sm mt-1 text-center">
+        <p className="text-wood-light text-sm mt-1 text-start">
           à partir de {(priceCents / 100).toFixed(2)} €
         </p>
       </div>
