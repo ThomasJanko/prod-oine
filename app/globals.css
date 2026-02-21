@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: system-ui, -apple-system, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --wood-dark: #2d2318;
+  --metal-dark: #1a1a1a;
+  --cream: #f5f0e8;
+  --stone: #e8e4dc;
+}
+
+body {
+  @apply bg-cream text-wood-dark antialiased;
+}
+
+/* Industrial accent: thin rules like the collection title */
+.rule-line {
+  @apply h-px flex-1 bg-metal-dark/30;
+}
